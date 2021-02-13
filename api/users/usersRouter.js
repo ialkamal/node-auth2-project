@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const Users = require("./usersModel");
+const checkToken = require("../users/restricted-middleware");
 
-router.get("/", (req, res) => {
+router.get("/", checkToken, (req, res) => {
   Users.getUsers()
     .then((users) => {
       res.status(200).send(users);
